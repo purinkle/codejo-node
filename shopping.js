@@ -5,23 +5,28 @@ test('hello', function () {
 });
 
 test('When I scan nothing I get zero', function () {
-  assert.equal(new Checkout().total(), 0);
+  assert.equal(new Checkout().getTotal(), 0);
 });
 
-// test('When I scan one A then total is 50', function () {
-//   var checkout = new Checkout();
-//   checkout.scan('A');
-//   assert.equal(checkout.total(), 50);
-// });
+test('When I scan one A then total is 50', function () {
+  var checkout = new Checkout();
+  checkout.scan('A');
+  assert.equal(checkout.getTotal(), 50);
+});
 
 var Checkout = function () {
-  var rolf = 0;
+  var total = 0;
 
-  function total() {
-    return rolf;
+  function getTotal() {
+    return total;
+  }
+
+  function scan() {
+    total = 50;
   }
 
   return {
-    total: total
+    getTotal: getTotal,
+    scan: scan
   };
 };
